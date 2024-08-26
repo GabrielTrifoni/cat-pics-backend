@@ -2,24 +2,25 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { CatsController } from './cats.controller';
-import { Cat } from './cat.entity';
+import { CatsController } from './cat/cats.controller';
+import { Cat } from './cat/cat.entity';
+import ormConfig from './config/orm.config';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: '127.0.0.1',
-      port: 3306,
-      username: 'root',
-      password: 'example',
-      database: 'cat-pics',
-      entities: [Cat],
-      synchronize: true,
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: '.env',
+      load: [ormConfig],
+      expandVariables: true,
     }),
-    TypeOrmModule.forFeature([Cat]),
+    TypeOrmModule.forRootAsync({
+      useFactory: ormConfig
+    }),
+
   ],
-  controllers: [AppController, CatsController],
+  controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }

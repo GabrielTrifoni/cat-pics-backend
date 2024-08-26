@@ -13,7 +13,7 @@ import { Cat } from './cat.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateCatDto } from './create-cat.dto';
-import { UpdateCatDto } from './update-cat.dto';
+import { UpdateCatDto } from '../update-cat.dto';
 
 @Controller('/cats')
 export class CatsController {
