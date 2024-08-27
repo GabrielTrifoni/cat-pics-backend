@@ -1,7 +1,7 @@
 import { registerAs } from '@nestjs/config';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
-import { Cat } from 'src/cat/cat.entity';
-import { Photo } from 'src/photo/photo.entity';
+import { Cat } from 'src/entities/cat.entity';
+import { Photo } from 'src/entities/photo.entity';
 
 export default registerAs(
   'orm.config',

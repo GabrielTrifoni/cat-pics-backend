@@ -1,5 +1,5 @@
-import { Photo } from "src/photo/photo.entity";
 import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Photo } from "./photo.entity";
 
 @Entity()
 export class Cat {

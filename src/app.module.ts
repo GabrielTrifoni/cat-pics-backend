@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { CatsController } from './cat/cats.controller';
-import { Cat } from './cat/cat.entity';
+import { CatsController } from './modules/cat/cats.controller';
 import ormConfig from './config/orm.config';
 import { ConfigModule } from '@nestjs/config';
+import { Cat } from './entities/cat.entity';
+import { PhotosController } from './modules/photo/photos.controller';
+import { Photo } from './entities/photo.entity';
 
 @Module({
   imports: [
@@ -18,9 +18,9 @@ import { ConfigModule } from '@nestjs/config';
     TypeOrmModule.forRootAsync({
       useFactory: ormConfig
     }),
-
+    TypeOrmModule.forFeature([Cat, Photo]),
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [CatsController, PhotosController],
+  providers: [],
 })
 export class AppModule { }

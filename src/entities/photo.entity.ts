@@ -1,4 +1,4 @@
-import { Cat } from 'src/cat/cat.entity';
+import { Cat } from 'src/entities/cat.entity';
 import { Entity, PrimaryGeneratedColumn, Column, ManyToMany } from 'typeorm';
 
 @Entity()
