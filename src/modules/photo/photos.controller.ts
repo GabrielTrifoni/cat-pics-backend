@@ -31,10 +31,10 @@ export class PhotosController {
   
     @Patch(':id')
     async update(@Param('id') id, @Body() input: UpdatePhotoDto) {
-      const cat = await this.repository.findOneBy({ id });
+      const data = await this.repository.findOneBy({ id });
   
       return await this.repository.save({
-        ...cat,
+        ...data,
         ...input,
       });
     }
@@ -42,7 +42,7 @@ export class PhotosController {
     @Delete(':id')
     @HttpCode(204)
     async delete(@Param('id') id: number) {
-      const cat = await this.repository.findOneBy({ id });
-      this.repository.delete(cat);
+      const data = await this.repository.findOneBy({ id });
+      this.repository.delete(data);
     }
 }
