@@ -41,10 +41,10 @@ export class CatsController {
 
   @Patch(':id')
   async update(@Param('id') id, @Body() input: UpdateCatDto) {
-    const cat = await this.repository.findOneBy({ id });
+    const data = await this.repository.findOneBy({ id });
 
     return await this.repository.save({
-      ...cat,
+      ...data,
       ...input,
     });
   }
@@ -52,7 +52,7 @@ export class CatsController {
   @Delete(':id')
   @HttpCode(204)
   async delete(@Param('id') id: number) {
-    const cat = await this.repository.findOneBy({ id });
-    this.repository.delete(cat);
+    const data = await this.repository.findOneBy({ id });
+    this.repository.delete(data);
   }
 }
