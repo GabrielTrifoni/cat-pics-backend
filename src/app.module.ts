@@ -8,6 +8,7 @@ import { PhotoController } from './modules/photo/photo.controller';
 import { Photo } from './entities/photo.entity';
 import { PhotoService } from './modules/photo/photo.service';
 import { CatService } from './modules/cat/cat.service';
+import { CatPhoto } from './entities/cat-photo.entity';
 
 @Module({
   imports: [
@@ -18,9 +19,9 @@ import { CatService } from './modules/cat/cat.service';
       expandVariables: true,
     }),
     TypeOrmModule.forRootAsync({
-      useFactory: ormConfig
+      useFactory: ormConfig,
     }),
-    TypeOrmModule.forFeature([Cat, Photo]),
+    TypeOrmModule.forFeature([Cat, Photo, CatPhoto]),
   ],
   controllers: [CatsController, PhotoController],
   providers: [PhotoService, CatService],

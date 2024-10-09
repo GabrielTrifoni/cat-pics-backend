@@ -1,7 +1,7 @@
-import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Photo } from "./photo.entity";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { CatPhoto } from './cat-photo.entity';
 
-@Entity()
+@Entity('cat')
 export class Cat {
     @PrimaryGeneratedColumn()
     id: number;
@@ -9,11 +9,6 @@ export class Cat {
     @Column()
     name: string;
 
-    @ManyToMany(() => Photo, (photo) => photo.cats)
-    @JoinTable({
-        name: 'cat_photo',
-        joinColumn: { name: 'cat_id', referencedColumnName: 'id' },
-        inverseJoinColumn: { name: 'photo_id', referencedColumnName: 'id' },
-    })
-    photos: Photo[];
+    @OneToMany(() => CatPhoto, (catPhoto) => catPhoto.cat)
+    photos: CatPhoto[];
 }

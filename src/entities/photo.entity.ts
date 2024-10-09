@@ -1,7 +1,7 @@
-import { Cat } from 'src/entities/cat.entity';
-import { Entity, PrimaryGeneratedColumn, Column, ManyToMany } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import { CatPhoto } from './cat-photo.entity';
 
-@Entity()
+@Entity('photo')
 export class Photo {
   @PrimaryGeneratedColumn()
   id: number;
@@ -9,6 +9,6 @@ export class Photo {
   @Column()
   url: string;
 
-  @ManyToMany(() => Cat, (cat) => cat.photos)
-  cats: Cat[];
+  @OneToMany(() => CatPhoto, (catPhoto) => catPhoto.photo)
+  cats: CatPhoto[];
 }
