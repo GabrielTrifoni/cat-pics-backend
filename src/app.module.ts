@@ -7,6 +7,7 @@ import { Cat } from './entities/cat.entity';
 import { PhotoController } from './modules/photo/photo.controller';
 import { Photo } from './entities/photo.entity';
 import { PhotoService } from './modules/photo/photo.service';
+import { CatService } from './modules/cat/cat.service';
 
 @Module({
   imports: [
@@ -22,6 +23,6 @@ import { PhotoService } from './modules/photo/photo.service';
     TypeOrmModule.forFeature([Cat, Photo]),
   ],
   controllers: [CatsController, PhotoController],
-  providers: [PhotoService],
+  providers: [PhotoService, CatService],
 })
 export class AppModule { }

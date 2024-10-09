@@ -9,50 +9,33 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
-import { Cat } from '../../entities/cat.entity';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 import { CreateCatDto } from './dto/create-cat.dto';
 import { UpdateCatDto } from './dto/update-cat.dto';
+import { CatService } from './cat.service';
 
 @Controller('/cats')
 export class CatsController {
   constructor(
-    @InjectRepository(Cat)
-    private readonly repository: Repository<Cat>,
+    private readonly catService: CatService,
   ) {}
 
-  @Get()
   async findAll() {
-    return await this.repository.find();
+    return await this.catService.findAll();
   }
 
-  @Get(':id')
   async findOne(@Param('id', ParseIntPipe) id: number) {
-    return await this.repository.findOneBy({ id });
+    return await this.catService.findOne(id);
   }
 
-  @Post()
   async create(@Body() input: CreateCatDto) {
-    return await this.repository.save({
-      ...input,
-    });
+    return await this.catService.create(input);
   }
 
-  @Patch(':id')
-  async update(@Param('id') id, @Body() input: UpdateCatDto) {
-    const data = await this.repository.findOneBy({ id });
-
-    return await this.repository.save({
-      ...data,
-      ...input,
-    });
+  async update(@Param('id') id: number, @Body() input: UpdateCatDto) {
+    return await this.catService.update(id, input);
   }
 
-  @Delete(':id')
-  @HttpCode(204)
-  async delete(@Param('id') id: number) {
-    const data = await this.repository.findOneBy({ id });
-    this.repository.delete(data);
-  }
+  async delete(@Param('id', ParseIntPipe) id: number) {
+    return await this.catService.delete(id);
+  }  
 }
