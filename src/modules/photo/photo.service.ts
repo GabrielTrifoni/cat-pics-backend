@@ -12,21 +12,21 @@ export class PhotoService {
     private readonly repository: Repository<Photo>,
   ) {}
 
-  async findAll(): Promise<Photo[]> {
+  public async findAll(): Promise<Photo[]> {
     return await this.repository.find();
   }
 
-  async findOne(id: number): Promise<Photo> {
+  public async findOne(id: number): Promise<Photo> {
     return await this.repository.findOneBy({ id });
   }
 
-  async create(input: CreatePhotoDto): Promise<Photo> {
+  public async create(input: CreatePhotoDto): Promise<Photo> {
     return await this.repository.save({
       ...input,
     });
   }
 
-  async update(id: number, input: UpdatePhotoDto): Promise<Photo> {
+  public async update(id: number, input: UpdatePhotoDto): Promise<Photo> {
     const data = await this.repository.findOneBy({ id });
     return await this.repository.save({
       ...data,
@@ -34,7 +34,7 @@ export class PhotoService {
     });
   }
 
-  async delete(id: number): Promise<void> {
+  public async delete(id: number): Promise<void> {
     const data = await this.repository.findOneBy({ id });
     if (data) {
       await this.repository.delete(data);
