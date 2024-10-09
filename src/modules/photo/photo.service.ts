@@ -38,8 +38,8 @@ export class PhotoService {
       });
     }
 
-    return this.photoRepository.findOne({ 
-      where: { id: photo.id }, 
+    return this.photoRepository.findOne({
+      where: { id: photo.id },
       relations: ['cats'],
     });
   }
@@ -50,12 +50,5 @@ export class PhotoService {
       ...data,
       ...input,
     });
-  }
-
-  public async delete(id: number): Promise<void> {
-    const data = await this.photoRepository.findOneBy({ id });
-    if (data) {
-      await this.photoRepository.delete(data);
-    }
   }
 }

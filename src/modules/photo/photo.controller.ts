@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, HttpCode, Param, ParseIntPipe, Patch, Post } from "@nestjs/common";
+import { Body, Controller, Get, Param, ParseIntPipe, Patch, Post } from "@nestjs/common";
 import { CreatePhotoDto } from "./dto/create-photo.dto";
 import { UpdatePhotoDto } from "./dto/update-photo.dto";
 import { PhotoService } from "./photo.service";
@@ -27,11 +27,5 @@ export class PhotoController {
   @Patch(':id')
   async update(@Param('id') id: number, @Body() input: UpdatePhotoDto) {
     return await this.photoService.update(id, input);
-  }
-
-  @Delete(':id')
-  @HttpCode(204)
-  async delete(@Param('id', ParseIntPipe) id: number) {
-    return await this.photoService.delete(id);
   }
 }

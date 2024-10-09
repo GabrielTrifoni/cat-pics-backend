@@ -1,9 +1,7 @@
 import {
   Body,
   Controller,
-  Delete,
   Get,
-  HttpCode,
   Param,
   ParseIntPipe,
   Patch,
@@ -37,11 +35,5 @@ export class CatsController {
   @Patch(':id')
   async update(@Param('id') id: number, @Body() input: UpdateCatDto) {
     return await this.catService.update(id, input);
-  }
-
-  @Delete(':id')
-  @HttpCode(204)
-  async delete(@Param('id', ParseIntPipe) id: number) {
-    return await this.catService.delete(id);
   }
 }

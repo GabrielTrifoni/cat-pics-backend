@@ -1,4 +1,4 @@
-import { Body, Delete, Get, HttpCode, Injectable, Param, ParseIntPipe, Patch, Post } from "@nestjs/common";
+import { Body, Injectable, Param, ParseIntPipe } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Cat } from "src/entities/cat.entity";
 import { Repository } from "typeorm";
@@ -33,10 +33,5 @@ export class CatService {
             ...data,
             ...input,
         });
-    }
-
-    public async delete(@Param('id') id: number) {
-        const data = await this.repository.findOneBy({ id });
-        this.repository.delete(data);
     }
 }
