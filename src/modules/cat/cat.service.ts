@@ -13,11 +13,16 @@ export class CatService {
     ) { }
 
     public async findAll() {
-        return await this.repository.find();
+        return await this.repository.find({
+            relations: ['photos', 'photos.cat'],
+        });
     }
 
     public async findOne(@Param('id', ParseIntPipe) id: number) {
-        return await this.repository.findOneBy({ id });
+        return await this.repository.findOne({
+            where: { id },
+            relations: ['photos', 'photos.cat'],
+        });
     }
 
     public async create(@Body() input: CreateCatDto) {

@@ -19,11 +19,16 @@ export class PhotoService {
   ) { }
 
   public async findAll(): Promise<Photo[]> {
-    return await this.photoRepository.find();
+    return await this.photoRepository.find({
+      relations: ['cats', 'cats.photo'],
+    });
   }
 
   public async findOne(id: number): Promise<Photo> {
-    return await this.photoRepository.findOneBy({ id });
+    return await this.photoRepository.findOne({
+      where: {id},
+      relations: ['cats', 'cats.photo'],
+    });
   }
 
   public async create(input: CreatePhotoDto): Promise<Photo> {
