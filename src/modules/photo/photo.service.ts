@@ -26,7 +26,7 @@ export class PhotoService {
 
   public async findOne(id: number): Promise<Photo> {
     return await this.photoRepository.findOne({
-      where: {id},
+      where: { id },
       relations: ['cats', 'cats.photo'],
     });
   }
@@ -50,9 +50,25 @@ export class PhotoService {
   }
 
   public async update(id: number, input: UpdatePhotoDto): Promise<Photo> {
-    const data = await this.photoRepository.findOneBy({ id });
+    const photo = await this.photoRepository.findOneBy({ id });
+
+    if (input.url) {
+      photo.url = input.url;
+    }
+
+    if (input.catsIds) {
+      await this.catPhotoRepository.delete({ photoId: id});
+
+      for (const catId of input.catsIds) {
+        await this.catPhotoRepository.save({
+          catId: catId,
+          photoId: photo.id,
+        });
+      }
+    }
+
     return await this.photoRepository.save({
-      ...data,
+      ...photo,
       ...input,
     });
   }

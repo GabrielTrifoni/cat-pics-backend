@@ -9,6 +9,8 @@ import { Photo } from './entities/photo.entity';
 import { PhotoService } from './modules/photo/photo.service';
 import { CatService } from './modules/cat/cat.service';
 import { CatPhoto } from './entities/cat-photo.entity';
+import { AuthModule } from './auth/auth.module';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -22,6 +24,8 @@ import { CatPhoto } from './entities/cat-photo.entity';
       useFactory: ormConfig,
     }),
     TypeOrmModule.forFeature([Cat, Photo, CatPhoto]),
+    AuthModule,
+    UserModule,
   ],
   controllers: [CatsController, PhotoController],
   providers: [PhotoService, CatService],
