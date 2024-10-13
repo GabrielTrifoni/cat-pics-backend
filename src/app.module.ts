@@ -11,6 +11,7 @@ import { CatService } from './modules/cat/cat.service';
 import { CatPhoto } from './entities/cat-photo.entity';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
+import { User } from './entities/user.entity';
 
 @Module({
   imports: [
@@ -23,7 +24,7 @@ import { UserModule } from './user/user.module';
     TypeOrmModule.forRootAsync({
       useFactory: ormConfig,
     }),
-    TypeOrmModule.forFeature([Cat, Photo, CatPhoto]),
+    TypeOrmModule.forFeature([Cat, Photo, CatPhoto, User]),
     AuthModule,
     UserModule,
   ],

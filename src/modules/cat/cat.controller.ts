@@ -30,12 +30,13 @@ export class CatsController {
   }
 
   @Post()
-  // @UseGuards(AuthGuardJwt)
+  @UseGuards(AuthGuardJwt)
   async create(@Body() input: CreateCatDto) {
     return await this.catService.create(input);
   }
 
   @Patch(':id')
+  @UseGuards(AuthGuardJwt)
   async update(@Param('id') id: number, @Body() input: UpdateCatDto) {
     return await this.catService.update(id, input);
   }
